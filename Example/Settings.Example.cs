@@ -9,7 +9,7 @@ namespace Basic
     class Settings
     {
         public static string Username = "";
-        public static string Password = 
+        public static string Password = "";
     }
     
 }
