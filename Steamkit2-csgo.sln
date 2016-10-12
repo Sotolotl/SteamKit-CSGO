@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Steamkit2-csgo", "Steamkit2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{2B9E2E68-A70B-41B1-946F-CD62A66E7735}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basic", "Basic\Basic.csproj", "{08E8921B-5484-4789-8205-23EF04EFB548}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basic", "Example\Basic.csproj", "{08E8921B-5484-4789-8205-23EF04EFB548}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
