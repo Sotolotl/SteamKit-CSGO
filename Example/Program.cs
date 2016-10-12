@@ -4,66 +4,59 @@ using System.Threading;
 using System.Security.Cryptography;
 using CSGO;
 using SteamKit2;
-using SteamKit2.GC;
-using SteamKit2.GC.CSGO.Internal;
-using SteamKit2.Internal;
 
 namespace Basic
 {
     class Program
     {
-        static SteamClient steamClient;
-        static CallbackManager manager;
-        static SteamGameCoordinator gc;
+        static SteamClient _steamClient;
+        static CallbackManager _manager;
 
-        static SteamUser steamUser;
+        static SteamUser _steamUser;
 
-        static bool isRunning;
+        static bool _isRunning;
 
-        static string user, pass;
-        static string authCode, twoFactorAuth;
+        static string _authCode, _twoFactorAuth;
 
 
-        static void Main(string[] args)
+        static void Main()
         {
 
             // save our logon details
-            user = "";
-            pass = "";
 
             // create our steamclient instance
-            steamClient = new SteamClient();
+            _steamClient = new SteamClient();
             // create the callback manager which will route callbacks to function calls
-            manager = new CallbackManager(steamClient);
+            _manager = new CallbackManager(_steamClient);
 
             // get the steamuser handler, which is used for logging on after successfully connecting
-            steamUser = steamClient.GetHandler<SteamUser>();
-            gc = steamClient.GetHandler<SteamGameCoordinator>();
+            _steamUser = _steamClient.GetHandler<SteamUser>();
+            _steamClient.GetHandler<SteamGameCoordinator>();
 
             // register a few callbacks we're interested in
             // these are registered upon creation to a callback manager, which will then route the callbacks
             // to the functions specified
-            manager.Subscribe<SteamClient.ConnectedCallback>(OnConnected);
-            manager.Subscribe<SteamClient.DisconnectedCallback>(OnDisconnected);
+            _manager.Subscribe<SteamClient.ConnectedCallback>(OnConnected);
+            _manager.Subscribe<SteamClient.DisconnectedCallback>(OnDisconnected);
 
-            manager.Subscribe<SteamUser.LoggedOnCallback>(OnLoggedOn);
-            manager.Subscribe<SteamUser.LoggedOffCallback>(OnLoggedOff);
+            _manager.Subscribe<SteamUser.LoggedOnCallback>(OnLoggedOn);
+            _manager.Subscribe<SteamUser.LoggedOffCallback>(OnLoggedOff);
 
             // this callback is triggered when the steam servers wish for the client to store the sentry file
-            manager.Subscribe<SteamUser.UpdateMachineAuthCallback>(OnMachineAuth);
+            _manager.Subscribe<SteamUser.UpdateMachineAuthCallback>(OnMachineAuth);
 
-            isRunning = true;
+            _isRunning = true;
 
             Console.WriteLine("Connecting to Steam...");
 
             // initiate the connection
-            steamClient.Connect();
+            _steamClient.Connect();
 
             // create our callback handling loop
-            while (isRunning)
+            while (_isRunning)
             {
                 // in order for the callbacks to get routed, they need to be handled by the manager
-                manager.RunWaitCallbacks(TimeSpan.FromSeconds(1));
+                _manager.RunWaitCallbacks(TimeSpan.FromSeconds(1));
             }
         }
 
@@ -73,11 +66,11 @@ namespace Basic
             {
                 Console.WriteLine("Unable to connect to Steam: {0}", callback.Result);
 
-                isRunning = false;
+                _isRunning = false;
                 return;
             }
 
-            Console.WriteLine("Connected to Steam! Logging in '{0}'...", user);
+            Console.WriteLine("Connected to Steam! Logging in '{0}'...", Settings.Username);
 
             byte[] sentryHash = null;
             if (File.Exists("sentry.bin"))
@@ -87,18 +80,18 @@ namespace Basic
                 sentryHash = CryptoHelper.SHAHash(sentryFile);
             }
 
-            steamUser.LogOn(new SteamUser.LogOnDetails
+            _steamUser.LogOn(new SteamUser.LogOnDetails
             {
-                Username = user,
-                Password = pass,
+                Username = Settings.Username,
+                Password = Settings.Password,
 
                 // in this sample, we pass in an additional authcode
                 // this value will be null (which is the default) for our first logon attempt
-                AuthCode = authCode,
+                AuthCode = _authCode,
 
                 // if the account is using 2-factor auth, we'll provide the two factor code instead
                 // this will also be null on our first logon attempt
-                TwoFactorCode = twoFactorAuth,
+                TwoFactorCode = _twoFactorAuth,
 
                 // our subsequent logons use the hash of the sentry file as proof of ownership of the file
                 // this will also be null for our first (no authcode) and second (authcode only) logon attempts
@@ -115,27 +108,27 @@ namespace Basic
 
             Thread.Sleep(TimeSpan.FromSeconds(5));
 
-            steamClient.Connect();
+            _steamClient.Connect();
         }
 
         static void OnLoggedOn(SteamUser.LoggedOnCallback callback)
         {
             bool isSteamGuard = callback.Result == EResult.AccountLogonDenied;
-            bool is2FA = callback.Result == EResult.AccountLoginDeniedNeedTwoFactor;
+            bool is2Fa = callback.Result == EResult.AccountLoginDeniedNeedTwoFactor;
 
-            if (isSteamGuard || is2FA)
+            if (isSteamGuard || is2Fa)
             {
                 Console.WriteLine("This account is SteamGuard protected!");
 
-                if (is2FA)
+                if (is2Fa)
                 {
                     Console.Write("Please enter your 2 factor auth code from your authenticator app: ");
-                    twoFactorAuth = Console.ReadLine();
+                    _twoFactorAuth = Console.ReadLine();
                 }
                 else
                 {
                     Console.Write("Please enter the auth code sent to the email at {0}: ", callback.EmailDomain);
-                    authCode = Console.ReadLine();
+                    _authCode = Console.ReadLine();
                 }
 
                 return;
@@ -145,7 +138,7 @@ namespace Basic
             {
                 Console.WriteLine("Unable to logon to Steam: {0} / {1}", callback.Result, callback.ExtendedResult);
 
-                isRunning = false;
+                _isRunning = false;
                 return;
             }
 
@@ -154,11 +147,14 @@ namespace Basic
             // at this point, we'd be able to perform actions on Steam
 
             //TODO: More CSGO Stuff!
-            CsgoClient csgo = new CsgoClient(steamClient, manager);
-            csgo.OnPlayersProfile +=
-                delegate(ClientGCMsgProtobuf<CMsgGCCStrike15_v2_PlayersProfile> protobuf) { Console.WriteLine(protobuf); };
-            csgo.OnLaunchComplete += msg => csgo.PlayerProfileRequest(51455204);
-            csgo.Launch();
+            CsgoClient csgo = new CsgoClient(_steamClient, _manager, true);
+            csgo.Launch(protobuf =>
+            {
+                csgo.PlayerProfileRequest(51455204, msgProtobuf =>
+                {
+                    Console.WriteLine();
+                });
+            });
         }
 
         static void OnLoggedOff(SteamUser.LoggedOffCallback callback)
@@ -191,7 +187,7 @@ namespace Basic
             }
 
             // inform the steam servers that we're accepting this sentry file
-            steamUser.SendMachineAuthResponse(new SteamUser.MachineAuthDetails
+            _steamUser.SendMachineAuthResponse(new SteamUser.MachineAuthDetails
             {
                 JobID = callback.JobID,
 

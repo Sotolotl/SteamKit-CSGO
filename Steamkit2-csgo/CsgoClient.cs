@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting;
 using System.Threading;
 using SteamKit2;
 using SteamKit2.GC;
@@ -17,13 +18,12 @@ namespace CSGO
         private readonly SteamClient _steamClient;
 
         private Dictionary<uint, Action<IPacketGCMsg>> _gcMap = new Dictionary<uint, Action<IPacketGCMsg>>();
-        private SteamUser _user;
 
         #region contructor
         public CsgoClient(SteamClient steamClient, CallbackManager callbackManager, bool debug = false)
         {
             _steamClient = steamClient;
-            _user = steamClient.GetHandler<SteamUser>();
+            steamClient.GetHandler<SteamUser>();
             _gameCoordinator = steamClient.GetHandler<SteamGameCoordinator>();
 
             _debug = debug;
@@ -32,33 +32,25 @@ namespace CSGO
         }
         #endregion
 
-        #region events
-
-        public event Action<ClientGCMsgProtobuf<CMsgClientWelcome>> OnLaunchComplete;
-        public event Action<ClientGCMsgProtobuf<CMsgGCCStrike15_v2_PlayersProfile>> OnPlayersProfile;
-
-        #endregion
-
         private void OnGcMessage(SteamGameCoordinator.MessageCallback obj)
         {
-            Console.WriteLine("Received GC message: " + (EGCBaseClientMsg) obj.EMsg);
-            var messageMap = new Dictionary<uint, Action<IPacketGCMsg>>
-            {
-                {(uint) EGCBaseClientMsg.k_EMsgGCClientWelcome, msg => OnLaunchComplete?.Invoke(new ClientGCMsgProtobuf<CMsgClientWelcome>(msg))},
-                {(uint)ECsgoGCMsg.k_EMsgGCCStrike15_v2_PlayersProfile, msg => OnPlayersProfile?.Invoke(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_PlayersProfile>(msg)) }
-        
-            };
+            if(_debug)
+                Console.WriteLine($"GC Message: {obj.EMsg}");
 
             Action<IPacketGCMsg> func;
-            if (!messageMap.TryGetValue(obj.EMsg, out func))
+            if (!_gcMap.TryGetValue(obj.EMsg, out func))
                 return;
 
             func(obj.Message);
         }
 
-        public void Launch()
+        public void Launch(Action<ClientGCMsgProtobuf<CMsgClientWelcome>> callback)
         {
-            Console.WriteLine("Launching CSGO");
+            _gcMap.Add((uint) EGCBaseClientMsg.k_EMsgGCClientWelcome, msg => callback(new ClientGCMsgProtobuf<CMsgClientWelcome>(msg)));
+
+            if(_debug)
+                Console.WriteLine("Launching CSGO");
+
             var playGame = new ClientMsgProtobuf<CMsgClientGamesPlayed>(EMsg.ClientGamesPlayed);
 
             playGame.Body.games_played.Add(new CMsgClientGamesPlayed.GamePlayed
@@ -74,8 +66,9 @@ namespace CSGO
             _gameCoordinator.Send(clientHello, CsgoAppid);
         }
 
-        public void PlayerProfileRequest(uint accountId)
+        public void PlayerProfileRequest(uint accountId, Action<ClientGCMsgProtobuf<CMsgGCCStrike15_v2_PlayersProfile>> callback)
         {
+            _gcMap.Add((uint)ECsgoGCMsg.k_EMsgGCCStrike15_v2_PlayersProfile, msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_PlayersProfile>(msg)));
             PlayerProfileRequest(accountId, 32);
         }
         public void PlayerProfileRequest(uint accountId, uint reqLevel)
