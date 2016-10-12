@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="CsgoClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SingleUseDictionary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

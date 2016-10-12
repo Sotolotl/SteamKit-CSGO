@@ -152,7 +152,13 @@ namespace Basic
             {
                 csgo.PlayerProfileRequest(51455204, msgProtobuf =>
                 {
-                    Console.WriteLine();
+                    if(msgProtobuf.account_profiles.Count > 0)
+                        Console.WriteLine($"Player has {msgProtobuf.account_profiles[0].ranking.wins} wins");
+                });
+
+                csgo.MatchmakingStatsRequest(msgProtobuf =>
+                {
+                    Console.WriteLine($"{msgProtobuf.global_stats.players_online} players searching");
                 });
             });
         }
