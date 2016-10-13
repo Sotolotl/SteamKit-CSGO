@@ -9,17 +9,25 @@ namespace CSGO
 {
     public partial class CsgoClient
     {
+        //APP ID for csgo
         private const int CsgoAppid = 730;
         private readonly bool _debug;
         private readonly SteamGameCoordinator _gameCoordinator;
 
         private readonly SteamClient _steamClient;
 
+        //Contains the callbacks
         private readonly SingleUseDictionary<uint, Action<IPacketGCMsg>> _gcMap =
             new SingleUseDictionary<uint, Action<IPacketGCMsg>>();
 
         #region contructor
 
+        /// <summary>
+        /// Client for CSGO, allows basic operations such as requesting ranks
+        /// </summary>
+        /// <param name="steamClient">A logged in SteamKit2 SteamClient</param>
+        /// <param name="callbackManager">The callback manager you used in your log in code</param>
+        /// <param name="debug">Wether or not we want to have debug output</param>
         public CsgoClient(SteamClient steamClient, CallbackManager callbackManager, bool debug = false)
         {
             _steamClient = steamClient;
@@ -46,6 +54,10 @@ namespace CSGO
             func(obj.Message);
         }
 
+        /// <summary>
+        /// Launches the game
+        /// </summary>
+        /// <param name="callback">The callback to be executed when the operation finishes</param>
         public void Launch(Action<CMsgClientWelcome> callback)
         {
             _gcMap.Add((uint) EGCBaseClientMsg.k_EMsgGCClientWelcome,

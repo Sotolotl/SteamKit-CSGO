@@ -2,7 +2,11 @@
 
 namespace CSGO
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Single Use Dictionary, removes an entry after it has been read.
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
     internal class SingleUseDictionary<TKey, TValue> : Dictionary<TKey, TValue>
     {
         public new TValue this[TKey key]
