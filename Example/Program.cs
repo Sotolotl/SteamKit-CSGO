@@ -150,6 +150,7 @@ namespace Basic
             CsgoClient csgo = new CsgoClient(_steamClient, _manager, true);
             csgo.Launch(protobuf =>
             {
+                Thread.Sleep(1000);
                 csgo.PlayerProfileRequest(51455204, msgProtobuf =>
                 {
                     if(msgProtobuf.account_profiles.Count > 0)
@@ -160,6 +161,10 @@ namespace Basic
                 {
                     Console.WriteLine($"{msgProtobuf.global_stats.players_online} players searching");
                 });
+
+                csgo.RequestCurrentLiveGames(list => { Console.WriteLine(list.matches.Count); });
+
+                csgo.RequestRecentGames(51455204, list => { Console.WriteLine(list.accountid); });
             });
         }
 

@@ -15,9 +15,22 @@ namespace CSGO
             {
                 TValue val = base[key];
                 Remove(key);
+                
                 return val;
             }
             set { base[key] = value; }
         }
+
+        public new bool TryGetValue(TKey key, out TValue value)
+        {
+            if (this.ContainsKey(key))
+            {
+                value = this[key];
+                return true;
+            }
+            value = default(TValue);
+            return false;
+        }
+
     }
 }
