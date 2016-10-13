@@ -17,8 +17,7 @@ namespace CSGO
         private readonly SteamClient _steamClient;
 
         //Contains the callbacks
-        private readonly SingleUseDictionary<uint, Action<IPacketGCMsg>> _gcMap =
-            new SingleUseDictionary<uint, Action<IPacketGCMsg>>();
+        private readonly CallbackStore _gcMap = new CallbackStore();
 
         #region contructor
 
