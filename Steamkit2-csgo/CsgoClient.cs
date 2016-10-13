@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Remoting;
 using System.Threading;
 using SteamKit2;
 using SteamKit2.GC;
@@ -16,10 +14,12 @@ namespace CSGO
         private readonly SteamGameCoordinator _gameCoordinator;
 
         private readonly SteamClient _steamClient;
-        
-        private SingleUseDictionary<uint, Action<IPacketGCMsg>> _gcMap = new SingleUseDictionary<uint, Action<IPacketGCMsg>>();
+
+        private readonly SingleUseDictionary<uint, Action<IPacketGCMsg>> _gcMap =
+            new SingleUseDictionary<uint, Action<IPacketGCMsg>>();
 
         #region contructor
+
         public CsgoClient(SteamClient steamClient, CallbackManager callbackManager, bool debug = false)
         {
             _steamClient = steamClient;
@@ -30,12 +30,14 @@ namespace CSGO
 
             callbackManager.Subscribe<SteamGameCoordinator.MessageCallback>(OnGcMessage);
         }
+
         #endregion
 
         private void OnGcMessage(SteamGameCoordinator.MessageCallback obj)
         {
-            if(_debug)
-                Console.WriteLine($"GC Message: {Enum.GetName(typeof(ECsgoGCMsg), obj.EMsg) ?? Enum.GetName(typeof(EMsg), obj.EMsg)}");
+            if (_debug)
+                Console.WriteLine(
+                    $"GC Message: {Enum.GetName(typeof(ECsgoGCMsg), obj.EMsg) ?? Enum.GetName(typeof(EMsg), obj.EMsg)}");
 
             Action<IPacketGCMsg> func;
             if (!_gcMap.TryGetValue(obj.EMsg, out func))
@@ -46,9 +48,10 @@ namespace CSGO
 
         public void Launch(Action<CMsgClientWelcome> callback)
         {
-            _gcMap.Add((uint) EGCBaseClientMsg.k_EMsgGCClientWelcome, msg => callback(new ClientGCMsgProtobuf<CMsgClientWelcome>(msg).Body));
+            _gcMap.Add((uint) EGCBaseClientMsg.k_EMsgGCClientWelcome,
+                msg => callback(new ClientGCMsgProtobuf<CMsgClientWelcome>(msg).Body));
 
-            if(_debug)
+            if (_debug)
                 Console.WriteLine("Launching CSGO");
 
             var playGame = new ClientMsgProtobuf<CMsgClientGamesPlayed>(EMsg.ClientGamesPlayed);
