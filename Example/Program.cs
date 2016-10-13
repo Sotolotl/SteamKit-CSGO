@@ -2,8 +2,8 @@
 using System.IO;
 using System.Threading;
 using System.Security.Cryptography;
-using CSGO;
 using SteamKit2;
+using CsgoClient = MNet.CSGO.CsgoClient;
 
 namespace Basic
 {
@@ -164,7 +164,7 @@ namespace Basic
 
                 csgo.RequestCurrentLiveGames(list => { Console.WriteLine(list.matches.Count); });
 
-                csgo.RequestRecentGames(51455204, list => { Console.WriteLine(list.accountid); });
+                csgo.RequestRecentGames(list => { Console.WriteLine(list.accountid); });
             });
         }
 

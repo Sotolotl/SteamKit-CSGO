@@ -5,8 +5,11 @@ using SteamKit2.GC;
 using SteamKit2.GC.CSGO.Internal;
 using SteamKit2.Internal;
 
-namespace CSGO
+namespace MNet.CSGO
 {
+    /// <summary>
+    /// Client for CSGO, allows basic operations such as requesting ranks
+    /// </summary>
     public partial class CsgoClient
     {
         //APP ID for csgo
@@ -23,7 +26,7 @@ namespace CSGO
         #region contructor
 
         /// <summary>
-        /// Client for CSGO, allows basic operations such as requesting ranks
+        /// Creates the client
         /// </summary>
         /// <param name="steamClient">A logged in SteamKit2 SteamClient</param>
         /// <param name="callbackManager">The callback manager you used in your log in code</param>

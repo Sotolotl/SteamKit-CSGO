@@ -2,7 +2,7 @@
 using SteamKit2.GC;
 using SteamKit2.GC.CSGO.Internal;
 
-namespace CSGO
+namespace MNet.CSGO
 {
     public partial class CsgoClient
     {
