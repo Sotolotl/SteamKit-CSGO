@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpTOC>
 
-  <HelpTOCNode Id="803a846e-5da4-4e9f-b3a8-377e391d123d" Title="CSGO" Url="html/a57d915f-f0f6-df1a-c70b-029e9e8a4147.htm">
-    <HelpTOCNode Id="b3d2021f-58b5-4bcd-acc2-ea6147c2f25a" Title="CsgoClient Class" Url="html/44f0de74-71ef-859a-c9c6-8d226ab19565.htm">
-      <HelpTOCNode Title="CsgoClient Constructor " Url="html/0cefcb88-b852-db2d-b3e1-c90cc6b3ebfb.htm" />
-      <HelpTOCNode Id="e1d1048a-3a46-4db0-8f70-d812947d7839" Title="CsgoClient Methods" Url="html/5b729029-73b1-7f53-6583-8457c39ea9d1.htm">
-        <HelpTOCNode Title="Launch Method " Url="html/19be519f-d605-04bd-0752-8714729a5f8c.htm" />
-        <HelpTOCNode Title="MatchmakingStatsRequest Method " Url="html/00969bc7-2c0e-ffe8-820b-073b1b95af54.htm" />
-        <HelpTOCNode Id="be2bb529-8fc9-46eb-bddf-d9da83053fe5" Title="PlayerProfileRequest Method " Url="html/c1c579fa-8d39-ab40-bfd3-b39d934b0ced.htm">
-          <HelpTOCNode Title="PlayerProfileRequest Method (UInt32, Action(CMsgGCCStrike15_v2_PlayersProfile))" Url="html/48c6fa8a-a47f-fa52-02e0-6708af7c7a71.htm" />
-          <HelpTOCNode Title="PlayerProfileRequest Method (UInt32, UInt32, Action(CMsgGCCStrike15_v2_PlayersProfile))" Url="html/e6b9fed3-5c3a-efdf-a2f6-e64f101723c5.htm" />
+  <HelpTOCNode Id="0f738b28-8d41-43d6-b1d6-22849acd9bbe" Title="MNet.CSGO" Url="html/bfb0332a-d571-44ff-de99-1c55c54fce43.htm">
+    <HelpTOCNode Id="9207202c-c4a4-46d3-9005-b6465d012b9e" Title="CsgoClient Class" Url="html/9e86b12a-1cb4-ec02-0ba8-9d5b8e7d054d.htm">
+      <HelpTOCNode Title="CsgoClient Constructor " Url="html/fd695cce-0e04-f4ef-883f-cccc24e09363.htm" />
+      <HelpTOCNode Id="dbf61c5c-fdd0-4524-b507-35a357aa48d5" Title="CsgoClient Methods" Url="html/1b324392-bec0-2c5b-4735-9add523749c3.htm">
+        <HelpTOCNode Title="Launch Method " Url="html/ab0f813b-5d15-778e-cffb-016b115b8ee7.htm" />
+        <HelpTOCNode Title="MatchmakingStatsRequest Method " Url="html/a198f2fd-6e67-07e2-3a55-e0fb8eeeba3f.htm" />
+        <HelpTOCNode Id="ade13e91-487b-4afa-9539-32e4758a007f" Title="PlayerProfileRequest Method " Url="html/c04af8b1-1a21-a976-641a-b2abdbf0d512.htm">
+          <HelpTOCNode Title="PlayerProfileRequest Method (UInt32, Action(CMsgGCCStrike15_v2_PlayersProfile))" Url="html/73f1f7ae-1553-f510-a98b-522390dbfbd0.htm" />
+          <HelpTOCNode Title="PlayerProfileRequest Method (UInt32, UInt32, Action(CMsgGCCStrike15_v2_PlayersProfile))" Url="html/936b379b-7706-2180-2538-8dbf770c3a72.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Title="RequestCurrentLiveGames Method " Url="html/f5c0e26a-d39a-828d-1c26-cc9aa471cf10.htm" />
-        <HelpTOCNode Title="RequestGame Method " Url="html/eb895c2a-31a7-5c6a-e40a-5e834678a0cc.htm" />
-        <HelpTOCNode Title="RequestLiveGameForUser Method " Url="html/66ad095e-a6fa-f362-5b8c-6a5da4846099.htm" />
-        <HelpTOCNode Id="b3c53eac-5c10-4d7d-8f29-9330b6d4c98a" Title="RequestRecentGames Method " Url="html/e4dab84b-2c9e-29b8-e097-03f9eae328b1.htm">
-          <HelpTOCNode Title="RequestRecentGames Method (Action(CMsgGCCStrike15_v2_MatchList))" Url="html/419a6829-a62a-48be-a911-cbaf0a1efb5d.htm" />
-          <HelpTOCNode Title="RequestRecentGames Method (UInt32, Action(CMsgGCCStrike15_v2_MatchList))" Url="html/d08d289c-1a1e-fc89-4ba4-bf0839d826ce.htm" />
+        <HelpTOCNode Title="RequestCurrentLiveGames Method " Url="html/741461bd-dd9c-ec06-b839-cdb036823530.htm" />
+        <HelpTOCNode Title="RequestGame Method " Url="html/ba81c54a-5f1c-de10-1915-f86d5729c51d.htm" />
+        <HelpTOCNode Title="RequestLiveGameForUser Method " Url="html/7aa2381d-3989-e680-f60f-426e5f10e798.htm" />
+        <HelpTOCNode Id="933f5bc3-db0e-46c5-8740-8f1b3b554af6" Title="RequestRecentGames Method " Url="html/82576a86-63a4-0dca-6857-b8d55e2c5265.htm">
+          <HelpTOCNode Title="RequestRecentGames Method (Action(CMsgGCCStrike15_v2_MatchList))" Url="html/3ee55a14-45b2-f118-eff7-5bc888fcfe22.htm" />
+          <HelpTOCNode Title="RequestRecentGames Method (UInt32, Action(CMsgGCCStrike15_v2_MatchList))" Url="html/35de3600-2f91-832f-8610-7beabc96a044.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
     </HelpTOCNode>
