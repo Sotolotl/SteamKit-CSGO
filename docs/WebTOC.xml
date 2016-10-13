@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOC>
+
+  <HelpTOCNode Id="803a846e-5da4-4e9f-b3a8-377e391d123d" Title="CSGO" Url="html/a57d915f-f0f6-df1a-c70b-029e9e8a4147.htm">
+    <HelpTOCNode Id="b3d2021f-58b5-4bcd-acc2-ea6147c2f25a" Title="CsgoClient Class" Url="html/44f0de74-71ef-859a-c9c6-8d226ab19565.htm">
+      <HelpTOCNode Title="CsgoClient Constructor " Url="html/0cefcb88-b852-db2d-b3e1-c90cc6b3ebfb.htm" />
+      <HelpTOCNode Id="e1d1048a-3a46-4db0-8f70-d812947d7839" Title="CsgoClient Methods" Url="html/5b729029-73b1-7f53-6583-8457c39ea9d1.htm">
+        <HelpTOCNode Title="Launch Method " Url="html/19be519f-d605-04bd-0752-8714729a5f8c.htm" />
+        <HelpTOCNode Title="MatchmakingStatsRequest Method " Url="html/00969bc7-2c0e-ffe8-820b-073b1b95af54.htm" />
+        <HelpTOCNode Id="be2bb529-8fc9-46eb-bddf-d9da83053fe5" Title="PlayerProfileRequest Method " Url="html/c1c579fa-8d39-ab40-bfd3-b39d934b0ced.htm">
+          <HelpTOCNode Title="PlayerProfileRequest Method (UInt32, Action(CMsgGCCStrike15_v2_PlayersProfile))" Url="html/48c6fa8a-a47f-fa52-02e0-6708af7c7a71.htm" />
+          <HelpTOCNode Title="PlayerProfileRequest Method (UInt32, UInt32, Action(CMsgGCCStrike15_v2_PlayersProfile))" Url="html/e6b9fed3-5c3a-efdf-a2f6-e64f101723c5.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="RequestCurrentLiveGames Method " Url="html/f5c0e26a-d39a-828d-1c26-cc9aa471cf10.htm" />
+        <HelpTOCNode Title="RequestGame Method " Url="html/eb895c2a-31a7-5c6a-e40a-5e834678a0cc.htm" />
+        <HelpTOCNode Title="RequestLiveGameForUser Method " Url="html/66ad095e-a6fa-f362-5b8c-6a5da4846099.htm" />
+        <HelpTOCNode Id="b3c53eac-5c10-4d7d-8f29-9330b6d4c98a" Title="RequestRecentGames Method " Url="html/e4dab84b-2c9e-29b8-e097-03f9eae328b1.htm">
+          <HelpTOCNode Title="RequestRecentGames Method (Action(CMsgGCCStrike15_v2_MatchList))" Url="html/419a6829-a62a-48be-a911-cbaf0a1efb5d.htm" />
+          <HelpTOCNode Title="RequestRecentGames Method (UInt32, Action(CMsgGCCStrike15_v2_MatchList))" Url="html/d08d289c-1a1e-fc89-4ba4-bf0839d826ce.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+</HelpTOC>

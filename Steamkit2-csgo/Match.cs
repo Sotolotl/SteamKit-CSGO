@@ -24,6 +24,11 @@ namespace CSGO
 
             _gameCoordinator.Send(clientGcMsgProtobuf, CsgoAppid);
         }
+
+        /// <summary>
+        /// Request the list of currently live games
+        /// </summary>
+        /// <param name="callback">The callback to be executed when the operation finishes.</param>
         public void RequestCurrentLiveGames(Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
             _gcMap.Add((uint)ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList, msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
@@ -34,6 +39,11 @@ namespace CSGO
             _gameCoordinator.Send(clientGcMsgProtobuf, CsgoAppid);
         }
 
+        /// <summary>
+        /// Requests current live game info for given user.
+        /// </summary>
+        /// <param name="accountId">Account to request</param>
+        /// <param name="callback">The callback to be executed when the operation finishes.</param>
         public void RequestLiveGameForUser(uint accountId, Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
             _gcMap.Add((uint)ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList, msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
@@ -63,6 +73,13 @@ namespace CSGO
 
         //TODO: Add correct packettype to Action
         //TODO: Resolve parameter types
+        /// <summary>
+        /// Requests info about game given a matchId, outcomeId, and token for a game.
+        /// </summary>
+        /// <param name="matchid">The ID of the match</param>
+        /// <param name="outcome">the ID of the outcome of the match</param>
+        /// <param name="token">No idea</param>
+        /// <param name="callback">The callback to be executed when the operation finishes.</param>
         [Obsolete("This hasn't been tested yet, as i don't know what the parameters do :(")]
         public void RequestGame(ulong matchid, ulong outcome, uint token, Action callback)
         {
@@ -80,8 +97,13 @@ namespace CSGO
             _gameCoordinator.Send(clientGcMsgProtobuf, CsgoAppid);
         }
 
-        //TODO: Add correct packettype to Action
-        //TODO: Resolve parameter types
+        /// <summary>
+        /// Requests a list of recent games for the given account id
+        /// </summary>
+        /// <param name="accountId">Account IDd for the request</param>
+        /// <param name="callback">The callback to be executed when the operation finishes.</param>
+        /// 
+        [Obsolete("The accountId parameter for requestRecentGames has been deprecated.")]
         public void RequestRecentGames(uint accountId, Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
             _gcMap.Add((uint)ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList, msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
@@ -96,6 +118,17 @@ namespace CSGO
             };
 
             _gameCoordinator.Send(clientGcMsgProtobuf, CsgoAppid);
+        }
+
+        /// <summary>
+        /// Requests a list of recent games for the given account id
+        /// </summary>
+        /// <param name="callback">The callback to be executed when the operation finishes.</param>
+        public void RequestRecentGames(Action<CMsgGCCStrike15_v2_MatchList> callback)
+        {
+#pragma warning disable 618 //b-b-but we're doing it the right way!
+            RequestRecentGames(_steamUser.SteamID.AccountID, callback);
+#pragma warning restore 618
         }
     }
 }

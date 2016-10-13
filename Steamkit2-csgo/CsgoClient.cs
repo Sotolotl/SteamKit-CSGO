@@ -15,6 +15,7 @@ namespace CSGO
         private readonly SteamGameCoordinator _gameCoordinator;
 
         private readonly SteamClient _steamClient;
+        private readonly SteamUser _steamUser;
 
         //Contains the callbacks
         private readonly CallbackStore _gcMap = new CallbackStore();
@@ -30,7 +31,7 @@ namespace CSGO
         public CsgoClient(SteamClient steamClient, CallbackManager callbackManager, bool debug = false)
         {
             _steamClient = steamClient;
-            steamClient.GetHandler<SteamUser>();
+            _steamUser = steamClient.GetHandler<SteamUser>();
             _gameCoordinator = steamClient.GetHandler<SteamGameCoordinator>();
 
             _debug = debug;
