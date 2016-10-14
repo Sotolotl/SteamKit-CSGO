@@ -5,15 +5,16 @@ using SteamKit2.GC;
 namespace MNet.CSGO
 {
     /// <summary>
-    /// Stores all callbacks based on time it was places, first created -> first executed
+    ///     Stores all callbacks based on time it was places, first created -> first executed
     /// </summary>
     internal class CallbackStore
     {
-        private readonly Dictionary<uint, Queue<Action<IPacketGCMsg>>> _dict = new Dictionary<uint, Queue<Action<IPacketGCMsg>>>();
+        private readonly Dictionary<uint, Queue<Action<IPacketGCMsg>>> _dict =
+            new Dictionary<uint, Queue<Action<IPacketGCMsg>>>();
 
         public bool TryGetValue(uint key, out Action<IPacketGCMsg> func)
         {
-            if (_dict.ContainsKey(key) && _dict[key].Count != 0)
+            if (_dict.ContainsKey(key) && (_dict[key].Count != 0))
             {
                 func = _dict[key].Dequeue();
                 return true;
@@ -24,7 +25,7 @@ namespace MNet.CSGO
 
         public void Add(uint key, Action<IPacketGCMsg> action)
         {
-            if(!_dict.ContainsKey(key))
+            if (!_dict.ContainsKey(key))
                 _dict.Add(key, new Queue<Action<IPacketGCMsg>>());
 
             _dict[key].Enqueue(action);

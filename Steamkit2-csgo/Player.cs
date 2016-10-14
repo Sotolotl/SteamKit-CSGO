@@ -7,7 +7,7 @@ namespace MNet.CSGO
     public partial class CsgoClient
     {
         /// <summary>
-        /// Request a player profile.
+        ///     Request a player profile.
         /// </summary>
         /// <param name="accountId">AccountID (SteamID32) of the player.</param>
         /// <param name="callback">The callback to be executed when the operation finishes.</param>
@@ -18,7 +18,7 @@ namespace MNet.CSGO
         }
 
         /// <summary>
-        /// Request a player profile.
+        ///     Request a player profile.
         /// </summary>
         /// <param name="accountId">AccountID (SteamID32) of the player.</param>
         /// <param name="requestLevel">To be honest i have no idea what this does, default is 32</param>

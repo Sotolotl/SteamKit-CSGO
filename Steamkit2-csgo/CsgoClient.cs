@@ -8,7 +8,7 @@ using SteamKit2.Internal;
 namespace MNet.CSGO
 {
     /// <summary>
-    /// Client for CSGO, allows basic operations such as requesting ranks
+    ///     Client for CSGO, allows basic operations such as requesting ranks
     /// </summary>
     public partial class CsgoClient
     {
@@ -17,16 +17,16 @@ namespace MNet.CSGO
         private readonly bool _debug;
         private readonly SteamGameCoordinator _gameCoordinator;
 
-        private readonly SteamClient _steamClient;
-        private readonly SteamUser _steamUser;
-
         //Contains the callbacks
         private readonly CallbackStore _gcMap = new CallbackStore();
+
+        private readonly SteamClient _steamClient;
+        private readonly SteamUser _steamUser;
 
         #region contructor
 
         /// <summary>
-        /// Creates the client
+        ///     Creates the client
         /// </summary>
         /// <param name="steamClient">A logged in SteamKit2 SteamClient</param>
         /// <param name="callbackManager">The callback manager you used in your log in code</param>
@@ -58,7 +58,7 @@ namespace MNet.CSGO
         }
 
         /// <summary>
-        /// Launches the game
+        ///     Launches the game
         /// </summary>
         /// <param name="callback">The callback to be executed when the operation finishes</param>
         public void Launch(Action<CMsgClientWelcome> callback)

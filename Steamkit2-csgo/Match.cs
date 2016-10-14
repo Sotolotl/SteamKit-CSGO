@@ -7,7 +7,7 @@ namespace MNet.CSGO
     public partial class CsgoClient
     {
         /// <summary>
-        /// Request MatchmakingStats from the game coordinator.
+        ///     Request MatchmakingStats from the game coordinator.
         /// </summary>
         /// <param name="callback">The callback to be executed when the operation finishes.</param>
         public void MatchmakingStatsRequest(Action<CMsgGCCStrike15_v2_MatchmakingGC2ClientHello> callback)
@@ -15,7 +15,7 @@ namespace MNet.CSGO
             _gcMap.Add((uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchmakingGC2ClientHello,
                 msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchmakingGC2ClientHello>(msg).Body));
 
-            if(_debug)
+            if (_debug)
                 Console.WriteLine("Requesting Matchmaking stats");
 
             var clientGcMsgProtobuf =
@@ -26,12 +26,13 @@ namespace MNet.CSGO
         }
 
         /// <summary>
-        /// Request the list of currently live games
+        ///     Request the list of currently live games
         /// </summary>
         /// <param name="callback">The callback to be executed when the operation finishes.</param>
         public void RequestCurrentLiveGames(Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
-            _gcMap.Add((uint)ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList, msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
+            _gcMap.Add((uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList,
+                msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
 
             var clientGcMsgProtobuf = new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchListRequestCurrentLiveGames>(
                 (uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchListRequestCurrentLiveGames);
@@ -40,13 +41,14 @@ namespace MNet.CSGO
         }
 
         /// <summary>
-        /// Requests current live game info for given user.
+        ///     Requests current live game info for given user.
         /// </summary>
         /// <param name="accountId">Account to request</param>
         /// <param name="callback">The callback to be executed when the operation finishes.</param>
         public void RequestLiveGameForUser(uint accountId, Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
-            _gcMap.Add((uint)ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList, msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
+            _gcMap.Add((uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList,
+                msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
 
             var clientGcMsgProtobuf = new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchListRequestLiveGameForUser>(
                 (uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchListRequestLiveGameForUser)
@@ -74,7 +76,7 @@ namespace MNet.CSGO
         //TODO: Add correct packettype to Action
         //TODO: Resolve parameter types
         /// <summary>
-        /// Requests info about game given a matchId, outcomeId, and token for a game.
+        ///     Requests info about game given a matchId, outcomeId, and token for a game.
         /// </summary>
         /// <param name="matchid">The ID of the match</param>
         /// <param name="outcome">the ID of the outcome of the match</param>
@@ -83,7 +85,8 @@ namespace MNet.CSGO
         [Obsolete("This hasn't been tested yet, as i don't know what the parameters do :(")]
         public void RequestGame(ulong matchid, ulong outcome, uint token, Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
-            _gcMap.Add((uint)ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList, msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
+            _gcMap.Add((uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList,
+                msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
 
             var clientGcMsgProtobuf = new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchListRequestFullGameInfo>(
                 (uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo)
@@ -100,15 +103,15 @@ namespace MNet.CSGO
         }
 
         /// <summary>
-        /// Requests a list of recent games for the given account id
+        ///     Requests a list of recent games for the given account id
         /// </summary>
         /// <param name="accountId">Account IDd for the request</param>
         /// <param name="callback">The callback to be executed when the operation finishes.</param>
-        /// 
         [Obsolete("The accountId parameter for requestRecentGames has been deprecated.")]
         public void RequestRecentGames(uint accountId, Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
-            _gcMap.Add((uint)ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList, msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
+            _gcMap.Add((uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList,
+                msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
 
             var clientGcMsgProtobuf = new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchListRequestRecentUserGames>(
                 (uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames)
@@ -123,7 +126,7 @@ namespace MNet.CSGO
         }
 
         /// <summary>
-        /// Requests a list of recent games for the given account id
+        ///     Requests a list of recent games for the given account id
         /// </summary>
         /// <param name="callback">The callback to be executed when the operation finishes.</param>
         public void RequestRecentGames(Action<CMsgGCCStrike15_v2_MatchList> callback)
