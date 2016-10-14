@@ -11,7 +11,7 @@
   <HelpKINode Title="CsgoClient.MatchmakingStatsRequest method" Url="html/a198f2fd-6e67-07e2-3a55-e0fb8eeeba3f.htm" />
   <HelpKINode Title="CsgoClient.PlayerProfileRequest method" Url="html/c04af8b1-1a21-a976-641a-b2abdbf0d512.htm" />
   <HelpKINode Title="CsgoClient.RequestCurrentLiveGames method" Url="html/741461bd-dd9c-ec06-b839-cdb036823530.htm" />
-  <HelpKINode Title="CsgoClient.RequestGame method" Url="html/ba81c54a-5f1c-de10-1915-f86d5729c51d.htm" />
+  <HelpKINode Title="CsgoClient.RequestGame method" Url="html/acaf0438-3b07-a576-c2c5-fe9112f4fe6f.htm" />
   <HelpKINode Title="CsgoClient.RequestLiveGameForUser method" Url="html/7aa2381d-3989-e680-f60f-426e5f10e798.htm" />
   <HelpKINode Title="CsgoClient.RequestRecentGames method" Url="html/82576a86-63a4-0dca-6857-b8d55e2c5265.htm" />
   <HelpKINode Title="Launch method" Url="html/ab0f813b-5d15-778e-cffb-016b115b8ee7.htm" />
@@ -20,7 +20,7 @@
   <HelpKINode Title="MNet.CSGO.CsgoClient class" Url="html/9e86b12a-1cb4-ec02-0ba8-9d5b8e7d054d.htm" />
   <HelpKINode Title="PlayerProfileRequest method" Url="html/c04af8b1-1a21-a976-641a-b2abdbf0d512.htm" />
   <HelpKINode Title="RequestCurrentLiveGames method" Url="html/741461bd-dd9c-ec06-b839-cdb036823530.htm" />
-  <HelpKINode Title="RequestGame method" Url="html/ba81c54a-5f1c-de10-1915-f86d5729c51d.htm" />
+  <HelpKINode Title="RequestGame method" Url="html/acaf0438-3b07-a576-c2c5-fe9112f4fe6f.htm" />
   <HelpKINode Title="RequestLiveGameForUser method" Url="html/7aa2381d-3989-e680-f60f-426e5f10e798.htm" />
   <HelpKINode Title="RequestRecentGames method" Url="html/82576a86-63a4-0dca-6857-b8d55e2c5265.htm" />
 </HelpKI>
