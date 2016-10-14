@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpTOC>
 
-  <HelpTOCNode Id="0f738b28-8d41-43d6-b1d6-22849acd9bbe" Title="MNet.CSGO" Url="html/bfb0332a-d571-44ff-de99-1c55c54fce43.htm">
-    <HelpTOCNode Id="9207202c-c4a4-46d3-9005-b6465d012b9e" Title="CsgoClient Class" Url="html/9e86b12a-1cb4-ec02-0ba8-9d5b8e7d054d.htm">
+  <HelpTOCNode Id="dee35915-a588-4778-b1ab-feb68229a69d" Title="MNet.CSGO" Url="html/bfb0332a-d571-44ff-de99-1c55c54fce43.htm">
+    <HelpTOCNode Id="8dc5ea0a-b046-406e-a7c3-6b62b0b3186c" Title="CsgoClient Class" Url="html/9e86b12a-1cb4-ec02-0ba8-9d5b8e7d054d.htm">
       <HelpTOCNode Title="CsgoClient Constructor " Url="html/fd695cce-0e04-f4ef-883f-cccc24e09363.htm" />
-      <HelpTOCNode Id="dbf61c5c-fdd0-4524-b507-35a357aa48d5" Title="CsgoClient Methods" Url="html/1b324392-bec0-2c5b-4735-9add523749c3.htm">
+      <HelpTOCNode Id="2ed91c34-af65-4173-9727-57f24fe2ec79" Title="CsgoClient Methods" Url="html/1b324392-bec0-2c5b-4735-9add523749c3.htm">
         <HelpTOCNode Title="Launch Method " Url="html/ab0f813b-5d15-778e-cffb-016b115b8ee7.htm" />
         <HelpTOCNode Title="MatchmakingStatsRequest Method " Url="html/a198f2fd-6e67-07e2-3a55-e0fb8eeeba3f.htm" />
-        <HelpTOCNode Id="ade13e91-487b-4afa-9539-32e4758a007f" Title="PlayerProfileRequest Method " Url="html/c04af8b1-1a21-a976-641a-b2abdbf0d512.htm">
+        <HelpTOCNode Id="96d2cf94-e8ea-480a-af1e-c55910d92cc2" Title="PlayerProfileRequest Method " Url="html/c04af8b1-1a21-a976-641a-b2abdbf0d512.htm">
           <HelpTOCNode Title="PlayerProfileRequest Method (UInt32, Action(CMsgGCCStrike15_v2_PlayersProfile))" Url="html/73f1f7ae-1553-f510-a98b-522390dbfbd0.htm" />
           <HelpTOCNode Title="PlayerProfileRequest Method (UInt32, UInt32, Action(CMsgGCCStrike15_v2_PlayersProfile))" Url="html/936b379b-7706-2180-2538-8dbf770c3a72.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="RequestCurrentLiveGames Method " Url="html/741461bd-dd9c-ec06-b839-cdb036823530.htm" />
         <HelpTOCNode Title="RequestGame Method " Url="html/ba81c54a-5f1c-de10-1915-f86d5729c51d.htm" />
         <HelpTOCNode Title="RequestLiveGameForUser Method " Url="html/7aa2381d-3989-e680-f60f-426e5f10e798.htm" />
-        <HelpTOCNode Id="933f5bc3-db0e-46c5-8740-8f1b3b554af6" Title="RequestRecentGames Method " Url="html/82576a86-63a4-0dca-6857-b8d55e2c5265.htm">
+        <HelpTOCNode Id="6bc9a447-ad48-485e-9126-6d3500d44b8e" Title="RequestRecentGames Method " Url="html/82576a86-63a4-0dca-6857-b8d55e2c5265.htm">
           <HelpTOCNode Title="RequestRecentGames Method (Action(CMsgGCCStrike15_v2_MatchList))" Url="html/3ee55a14-45b2-f118-eff7-5bc888fcfe22.htm" />
           <HelpTOCNode Title="RequestRecentGames Method (UInt32, Action(CMsgGCCStrike15_v2_MatchList))" Url="html/35de3600-2f91-832f-8610-7beabc96a044.htm" />
         </HelpTOCNode>
