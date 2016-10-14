@@ -81,8 +81,10 @@ namespace MNet.CSGO
         /// <param name="token">No idea</param>
         /// <param name="callback">The callback to be executed when the operation finishes.</param>
         [Obsolete("This hasn't been tested yet, as i don't know what the parameters do :(")]
-        public void RequestGame(ulong matchid, ulong outcome, uint token, Action callback)
+        public void RequestGame(ulong matchid, ulong outcome, uint token, Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
+            _gcMap.Add((uint)ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList, msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
+
             var clientGcMsgProtobuf = new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchListRequestFullGameInfo>(
                 (uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo)
             {

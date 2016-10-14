@@ -255,3 +255,5 @@ paket-files/
 Settings.cs
 /Steamkit2-csgo/Steamkit2-csgo.nuspec
 /Steamkit2-csgo/publish.bat
+*.ruleset
+*.py
