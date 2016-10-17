@@ -73,31 +73,28 @@ namespace SteamKit.CSGO
             }
         }*/
 
-        //TODO: Add correct packettype to Action
-        //TODO: Resolve parameter types
         /// <summary>
         ///     Requests info about game given a matchId, outcomeId, and token for a game.
         /// </summary>
-        /// <param name="matchid">The ID of the match</param>
-        /// <param name="outcome">the ID of the outcome of the match</param>
-        /// <param name="token">No idea</param>
+        /// <param name="request">Request parameters</param>
         /// <param name="callback">The callback to be executed when the operation finishes.</param>
-        [Obsolete("This hasn't been tested yet, as i don't know what the parameters do :(")]
-        public void RequestGame(ulong matchid, ulong outcome, uint token, Action<CMsgGCCStrike15_v2_MatchList> callback)
+        [Obsolete("This hasn't been tested yet")]
+        public void RequestGame(GameRequest request, Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
             _gcMap.Add((uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList,
                 msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
 
             var clientGcMsgProtobuf = new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchListRequestFullGameInfo>(
-                (uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo)
-            {
-                Body =
-                {
-                    matchid = matchid,
-                    outcomeid = outcome,
-                    token = token
-                }
-            };
+                                                                                                               (uint)
+                                                                                                               ECsgoGCMsg
+                                                                                                                   .k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo);
+
+            if(request.Token.HasValue)
+                clientGcMsgProtobuf.Body.token = request.Token.Value;
+            if (request.MatchId.HasValue)
+                clientGcMsgProtobuf.Body.matchid = request.MatchId.Value;
+            if (request.OutcomeId.HasValue)
+                clientGcMsgProtobuf.Body.outcomeid = request.OutcomeId.Value;
 
             _gameCoordinator.Send(clientGcMsgProtobuf, CsgoAppid);
         }
@@ -135,5 +132,23 @@ namespace SteamKit.CSGO
             RequestRecentGames(_steamUser.SteamID.AccountID, callback);
 #pragma warning restore 618
         }
+    }
+
+    /// <summary>
+    /// Request object for RequestGame
+    /// </summary>
+    public class GameRequest {
+        /// <summary>
+        /// UNKNOWN
+        /// </summary>
+        public uint? Token;
+        /// <summary>
+        /// ID of match
+        /// </summary>
+        public uint? MatchId;
+        /// <summary>
+        /// ID of outcome of match
+        /// </summary>
+        public uint? OutcomeId;
     }
 }
