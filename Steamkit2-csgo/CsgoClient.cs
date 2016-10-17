@@ -5,7 +5,7 @@ using SteamKit2.GC;
 using SteamKit2.GC.CSGO.Internal;
 using SteamKit2.Internal;
 
-namespace MNet.CSGO
+namespace SteamKit.CSGO
 {
     /// <summary>
     ///     Client for CSGO, allows basic operations such as requesting ranks
@@ -80,7 +80,11 @@ namespace MNet.CSGO
 
             Thread.Sleep(3000);
 
-            var clientHello = new ClientGCMsgProtobuf<CMsgClientHello>((uint) EGCBaseClientMsg.k_EMsgGCClientHello);
+            var clientHello = new ClientGCMsgProtobuf<CMsgClientHello>((uint) EGCBaseClientMsg.k_EMsgGCClientHello)
+            {
+                TargetJobID = _steamClient.GetNextJobID()
+            };
+
             _gameCoordinator.Send(clientHello, CsgoAppid);
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SteamKit2.GC;
 
-namespace MNet.CSGO
+namespace SteamKit.CSGO
 {
     /// <summary>
     ///     Stores all callbacks based on time it was places, first created -> first executed

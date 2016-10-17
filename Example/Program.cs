@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Security.Cryptography;
 using SteamKit2;
-using CsgoClient = MNet.CSGO.CsgoClient;
+using CsgoClient = SteamKit.CSGO.CsgoClient;
 
 namespace Basic
 {
