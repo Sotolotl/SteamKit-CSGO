@@ -5,5 +5,5 @@ A library build on top of [SteamKit2](https://github.com/SteamRE/SteamKit) for c
 
 Heavily inspired and based on Joshua Ferrara's [node-csgo](https://github.com/joshuaferrara/node-csgo)
 
-Documentation coming soon!
+Documentation can be found on https://michaelvdnet.github.io/SteamKit-CSGO/
 -
