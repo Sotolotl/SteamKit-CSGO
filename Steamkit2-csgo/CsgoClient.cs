@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Timers;
 using SteamKit2;
 using SteamKit2.GC;
 using SteamKit2.GC.CSGO.Internal;
@@ -23,6 +24,8 @@ namespace SteamKit.CSGO
         private readonly SteamClient _steamClient;
         private readonly SteamUser _steamUser;
 
+        private readonly System.Timers.Timer HelloTimer;
+
         #region contructor
 
         /// <summary>
@@ -40,6 +43,17 @@ namespace SteamKit.CSGO
             _debug = debug;
 
             callbackManager.Subscribe<SteamGameCoordinator.MessageCallback>(OnGcMessage);
+
+            HelloTimer = new System.Timers.Timer(1000);
+            HelloTimer.AutoReset = true;
+            HelloTimer.Elapsed += Knock;
+        }
+
+        private void Knock(object state, ElapsedEventArgs elapsedEventArgs)
+        {
+            Console.WriteLine("Knocking");
+            var clientmsg = new ClientGCMsgProtobuf<CMsgClientHello>((uint)EGCBaseClientMsg.k_EMsgGCClientHello);
+            _gameCoordinator.Send(clientmsg, CsgoAppid);
         }
 
         #endregion
@@ -49,6 +63,9 @@ namespace SteamKit.CSGO
             if (_debug)
                 Console.WriteLine(
                     $"GC Message: {Enum.GetName(typeof(ECsgoGCMsg), obj.EMsg) ?? Enum.GetName(typeof(EMsg), obj.EMsg)}");
+
+            if (obj.EMsg == (uint) EGCBaseClientMsg.k_EMsgGCClientWelcome)
+                HelloTimer.Stop();
 
             Action<IPacketGCMsg> func;
             if (!_gcMap.TryGetValue(obj.EMsg, out func))
@@ -78,14 +95,9 @@ namespace SteamKit.CSGO
 
             _steamClient.Send(playGame);
 
-            Thread.Sleep(3000);
+            HelloTimer.Start();
 
-            var clientHello = new ClientGCMsgProtobuf<CMsgClientHello>((uint) EGCBaseClientMsg.k_EMsgGCClientHello)
-            {
-                TargetJobID = _steamClient.GetNextJobID()
-            };
-
-            _gameCoordinator.Send(clientHello, CsgoAppid);
+            
         }
     }
 }

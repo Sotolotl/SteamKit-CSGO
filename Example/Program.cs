@@ -2,24 +2,25 @@
 using System.IO;
 using System.Threading;
 using System.Security.Cryptography;
+using SteamKit.CSGO;
 using SteamKit2;
 using CsgoClient = SteamKit.CSGO.CsgoClient;
 
 namespace Basic
 {
-    class Program
+    internal class Program
     {
-        static SteamClient _steamClient;
-        static CallbackManager _manager;
+        private static SteamClient _steamClient;
+        private static CallbackManager _manager;
 
-        static SteamUser _steamUser;
+        private static SteamUser _steamUser;
 
-        static bool _isRunning;
+        private static bool _isRunning;
 
-        static string _authCode, _twoFactorAuth;
+        private static string _authCode, _twoFactorAuth;
 
 
-        static void Main()
+        private static void Main()
         {
 
             // save our logon details
@@ -60,7 +61,7 @@ namespace Basic
             }
         }
 
-        static void OnConnected(SteamClient.ConnectedCallback callback)
+        private static void OnConnected(SteamClient.ConnectedCallback callback)
         {
             if (callback.Result != EResult.OK)
             {
@@ -99,7 +100,7 @@ namespace Basic
             });
         }
 
-        static void OnDisconnected(SteamClient.DisconnectedCallback callback)
+        private static void OnDisconnected(SteamClient.DisconnectedCallback callback)
         {
             // after recieving an AccountLogonDenied, we'll be disconnected from steam
             // so after we read an authcode from the user, we need to reconnect to begin the logon flow again
@@ -111,7 +112,7 @@ namespace Basic
             _steamClient.Connect();
         }
 
-        static void OnLoggedOn(SteamUser.LoggedOnCallback callback)
+        private static void OnLoggedOn(SteamUser.LoggedOnCallback callback)
         {
             bool isSteamGuard = callback.Result == EResult.AccountLogonDenied;
             bool is2Fa = callback.Result == EResult.AccountLoginDeniedNeedTwoFactor;
@@ -151,29 +152,38 @@ namespace Basic
             csgo.Launch(protobuf =>
             {
                 Thread.Sleep(1000);
-                csgo.PlayerProfileRequest(51455204, msgProtobuf =>
+                csgo.PlayerProfileRequest(326659014, msgProtobuf =>
                 {
                     if(msgProtobuf.account_profiles.Count > 0)
                         Console.WriteLine($"Player has {msgProtobuf.account_profiles[0].ranking.wins} wins");
                 });
 
-                csgo.MatchmakingStatsRequest(msgProtobuf =>
-                {
-                    Console.WriteLine($"{msgProtobuf.global_stats.players_online} players searching");
-                });
+                csgo.RequestLiveGameForUser(326659014, matchlist =>
+                                            {
+                                                csgo.RequestGame(new GameRequest() {MatchId = matchlist.matches[0].matchid},
+                                                                 list =>
+                                                                 {
+                                                                     Console.WriteLine(list);
+                                                                 });
+                                            });
 
-                csgo.RequestCurrentLiveGames(list => { Console.WriteLine(list.matches.Count); });
+                //csgo.MatchmakingStatsRequest(msgProtobuf =>
+                //{
+                //    Console.WriteLine($"{msgProtobuf.global_stats.players_online} players searching");
+                //});
 
-                csgo.RequestRecentGames(list => { Console.WriteLine(list.accountid); });
+                //csgo.RequestCurrentLiveGames(list => { Console.WriteLine(list.matches.Count); });
+
+                //csgo.RequestRecentGames(list => { Console.WriteLine(list.accountid); });
             });
         }
 
-        static void OnLoggedOff(SteamUser.LoggedOffCallback callback)
+        private static void OnLoggedOff(SteamUser.LoggedOffCallback callback)
         {
             Console.WriteLine("Logged off of Steam: {0}", callback.Result);
         }
 
-        static void OnMachineAuth(SteamUser.UpdateMachineAuthCallback callback)
+        private static void OnMachineAuth(SteamUser.UpdateMachineAuthCallback callback)
         {
             Console.WriteLine("Updating sentryfile...");
 

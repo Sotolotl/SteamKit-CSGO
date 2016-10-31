@@ -145,7 +145,7 @@ namespace SteamKit.CSGO
         /// <summary>
         /// ID of match
         /// </summary>
-        public uint? MatchId;
+        public ulong? MatchId;
         /// <summary>
         /// ID of outcome of match
         /// </summary>
