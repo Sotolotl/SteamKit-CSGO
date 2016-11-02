@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Threading;
 using System.Timers;
 using SteamKit2;
 using SteamKit2.GC;
 using SteamKit2.GC.CSGO.Internal;
 using SteamKit2.Internal;
 
-namespace SteamKit.CSGO
+namespace SteamKit.CSGO.API
 {
     /// <summary>
     ///     Client for CSGO, allows basic operations such as requesting ranks
@@ -24,7 +23,7 @@ namespace SteamKit.CSGO
         private readonly SteamClient _steamClient;
         private readonly SteamUser _steamUser;
 
-        private readonly System.Timers.Timer HelloTimer;
+        private readonly Timer HelloTimer;
 
         #region contructor
 
@@ -44,12 +43,12 @@ namespace SteamKit.CSGO
 
             callbackManager.Subscribe<SteamGameCoordinator.MessageCallback>(OnGcMessage);
 
-            HelloTimer = new System.Timers.Timer(1000);
+            HelloTimer = new Timer(1000);
             HelloTimer.AutoReset = true;
-            HelloTimer.Elapsed += Knock;
+            HelloTimer.Elapsed += SendClientHello;
         }
 
-        private void Knock(object state, ElapsedEventArgs elapsedEventArgs)
+        private void SendClientHello(object state, ElapsedEventArgs elapsedEventArgs)
         {
             Console.WriteLine("Knocking");
             var clientmsg = new ClientGCMsgProtobuf<CMsgClientHello>((uint)EGCBaseClientMsg.k_EMsgGCClientHello);

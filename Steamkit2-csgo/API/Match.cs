@@ -2,7 +2,7 @@
 using SteamKit2.GC;
 using SteamKit2.GC.CSGO.Internal;
 
-namespace SteamKit.CSGO
+namespace SteamKit.CSGO.API
 {
     public partial class CsgoClient
     {
@@ -13,14 +13,16 @@ namespace SteamKit.CSGO
         public void MatchmakingStatsRequest(Action<CMsgGCCStrike15_v2_MatchmakingGC2ClientHello> callback)
         {
             _gcMap.Add((uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchmakingGC2ClientHello,
-                msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchmakingGC2ClientHello>(msg).Body));
+                       msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchmakingGC2ClientHello>(msg).Body));
 
             if (_debug)
                 Console.WriteLine("Requesting Matchmaking stats");
 
             var clientGcMsgProtobuf =
                 new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchmakingClient2GCHello>(
-                    (uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchmakingClient2GCHello);
+                                                                                      (uint)
+                                                                                      ECsgoGCMsg
+                                                                                          .k_EMsgGCCStrike15_v2_MatchmakingClient2GCHello);
 
             _gameCoordinator.Send(clientGcMsgProtobuf, CsgoAppid);
         }
@@ -32,10 +34,13 @@ namespace SteamKit.CSGO
         public void RequestCurrentLiveGames(Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
             _gcMap.Add((uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList,
-                msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
+                       msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
 
             var clientGcMsgProtobuf = new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchListRequestCurrentLiveGames>(
-                (uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchListRequestCurrentLiveGames);
+                                                                                                                   (uint
+                                                                                                                   )
+                                                                                                                   ECsgoGCMsg
+                                                                                                                       .k_EMsgGCCStrike15_v2_MatchListRequestCurrentLiveGames);
 
             _gameCoordinator.Send(clientGcMsgProtobuf, CsgoAppid);
         }
@@ -48,10 +53,12 @@ namespace SteamKit.CSGO
         public void RequestLiveGameForUser(uint accountId, Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
             _gcMap.Add((uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList,
-                msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
+                       msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
 
             var clientGcMsgProtobuf = new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchListRequestLiveGameForUser>(
-                (uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchListRequestLiveGameForUser)
+                                                                                                                  (uint)
+                                                                                                                  ECsgoGCMsg
+                                                                                                                      .k_EMsgGCCStrike15_v2_MatchListRequestLiveGameForUser)
             {
                 Body =
                 {
@@ -82,14 +89,14 @@ namespace SteamKit.CSGO
         public void RequestGame(GameRequest request, Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
             _gcMap.Add((uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList,
-                msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
+                       msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
 
             var clientGcMsgProtobuf = new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchListRequestFullGameInfo>(
                                                                                                                (uint)
                                                                                                                ECsgoGCMsg
                                                                                                                    .k_EMsgGCCStrike15_v2_MatchListRequestFullGameInfo);
 
-            if(request.Token.HasValue)
+            if (request.Token.HasValue)
                 clientGcMsgProtobuf.Body.token = request.Token.Value;
             if (request.MatchId.HasValue)
                 clientGcMsgProtobuf.Body.matchid = request.MatchId.Value;
@@ -108,10 +115,12 @@ namespace SteamKit.CSGO
         public void RequestRecentGames(uint accountId, Action<CMsgGCCStrike15_v2_MatchList> callback)
         {
             _gcMap.Add((uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchList,
-                msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
+                       msg => callback(new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchList>(msg).Body));
 
             var clientGcMsgProtobuf = new ClientGCMsgProtobuf<CMsgGCCStrike15_v2_MatchListRequestRecentUserGames>(
-                (uint) ECsgoGCMsg.k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames)
+                                                                                                                  (uint)
+                                                                                                                  ECsgoGCMsg
+                                                                                                                      .k_EMsgGCCStrike15_v2_MatchListRequestRecentUserGames)
             {
                 Body =
                 {
@@ -135,20 +144,23 @@ namespace SteamKit.CSGO
     }
 
     /// <summary>
-    /// Request object for RequestGame
+    ///     Request object for RequestGame
     /// </summary>
-    public class GameRequest {
+    public class GameRequest
+    {
         /// <summary>
-        /// UNKNOWN
-        /// </summary>
-        public uint? Token;
-        /// <summary>
-        /// ID of match
+        ///     ID of match
         /// </summary>
         public ulong? MatchId;
+
         /// <summary>
-        /// ID of outcome of match
+        ///     ID of outcome of match
         /// </summary>
         public uint? OutcomeId;
+
+        /// <summary>
+        ///     UNKNOWN
+        /// </summary>
+        public uint? Token;
     }
 }

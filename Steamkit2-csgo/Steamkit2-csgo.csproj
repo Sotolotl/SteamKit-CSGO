@@ -61,11 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CsgoClient.cs" />
-    <Compile Include="Match.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="API\CallbackStore.cs" />
+    <Compile Include="API\CsgoClient.cs" />
+    <Compile Include="API\Match.cs" />
+    <Compile Include="API\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CallbackStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
