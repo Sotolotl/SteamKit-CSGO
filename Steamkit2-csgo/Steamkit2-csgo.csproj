@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\CallbackStore.cs" />
-    <Compile Include="API\CsgoClient.cs" />
+    <Compile Include="API\CsgoApi.cs" />
     <Compile Include="API\Match.cs" />
     <Compile Include="API\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

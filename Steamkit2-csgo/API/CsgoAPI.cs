@@ -10,7 +10,7 @@ namespace SteamKit.CSGO.API
     /// <summary>
     ///     Client for CSGO, allows basic operations such as requesting ranks
     /// </summary>
-    public partial class CsgoClient
+    public partial class CsgoApi
     {
         //APP ID for csgo
         private const int CsgoAppid = 730;
@@ -33,7 +33,7 @@ namespace SteamKit.CSGO.API
         /// <param name="steamClient">A logged in SteamKit2 SteamClient</param>
         /// <param name="callbackManager">The callback manager you used in your log in code</param>
         /// <param name="debug">Wether or not we want to have debug output</param>
-        public CsgoClient(SteamClient steamClient, CallbackManager callbackManager, bool debug = false)
+        public CsgoApi(SteamClient steamClient, CallbackManager callbackManager, bool debug = false)
         {
             _steamClient = steamClient;
             _steamUser = steamClient.GetHandler<SteamUser>();

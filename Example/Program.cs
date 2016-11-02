@@ -5,7 +5,6 @@ using System.Security.Cryptography;
 using SteamKit.CSGO;
 using SteamKit.CSGO.API;
 using SteamKit2;
-using CsgoClient = SteamKit.CSGO.API.CsgoClient;
 
 namespace Basic
 {
@@ -149,7 +148,7 @@ namespace Basic
             // at this point, we'd be able to perform actions on Steam
 
             //TODO: More CSGO Stuff!
-            CsgoClient csgo = new CsgoClient(_steamClient, _manager, true);
+            CsgoApi csgo = new CsgoApi(_steamClient, _manager, true);
             csgo.Launch(protobuf =>
             {
                 Thread.Sleep(1000);

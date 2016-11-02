@@ -4,7 +4,7 @@ using SteamKit2.GC.CSGO.Internal;
 
 namespace SteamKit.CSGO.API
 {
-    public partial class CsgoClient
+    public partial class CsgoApi
     {
         /// <summary>
         ///     Request a player profile.
